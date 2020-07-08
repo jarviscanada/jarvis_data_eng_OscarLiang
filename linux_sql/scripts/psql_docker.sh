@@ -33,12 +33,25 @@ case $action in
         docker run --name jrvs-psql -e POSTGRES_PASSWORD=${db_pass} -e POSTGRES_USER=${db_user} -d -v pgdata:/var/lib/postgresql/data -p 5432:5432 postgres
         exit $?
         ;;
+
     'start')
-        echo 'start'
+        if [ "$container_exists" != "2" ]; then
+            echo "Error: container does not exist. $usage" >&2
+            exit 1
+        fi
+        docker start jrvs-psql
+        exit $?
         ;;
+
     'stop')
-        echo 'stop'
+        if [ "$container_exists" != "2" ]; then
+            echo "Error: container does not exist. $usage" >&2
+            exit 1
+        fi
+        docker stop jrvs-psql
+        exit $?
         ;;
+
     *)
         echo "Error: invalid action. $usage" >&2
         exit 1
