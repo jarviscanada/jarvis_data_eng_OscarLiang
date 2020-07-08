@@ -23,7 +23,7 @@ case $action in
             exit 1
         fi
 
-        if [ "$db_pass" = "" ]; then
+        if [ "$#" != "3" ]; then
             echo "Error: missing username and/or password. $usage" >&2
             exit 1
         fi
