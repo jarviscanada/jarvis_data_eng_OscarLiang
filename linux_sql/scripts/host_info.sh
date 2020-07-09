@@ -36,3 +36,4 @@ _END_
 
 export PGPASSWORD="$psql_password"
 psql -h "$psql_host" -p "$psql_port" -U "$psql_user" -d "$db_name" -c "$statement"
+exit $?
