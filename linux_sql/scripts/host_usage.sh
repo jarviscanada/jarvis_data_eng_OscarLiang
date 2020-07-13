@@ -1,6 +1,16 @@
 # !/bin/bash
 # Bash script for collecting usage information to store in database
 
+# Function to parse information from a command
+parse_info () {
+
+  string_to_parse=$1
+  search_line=$2
+  awk_command=$3
+
+  echo "$string_to_parse" | egrep "$search_line" | awk "$awk_command"
+}
+
 # Arguments
 psql_host=$1
 psql_port=$2
@@ -17,13 +27,17 @@ if [ "$#" != "5" ]; then
 fi
 
 # Parse hardware info
+mem_info=$(free -k)
+cpu_info=$(vmstat)
+disk_info=$(vmstat -d)
+disk_space=$(df -BM)
 hostname=$(hostname -f)
 timestamp=$(date "+%Y-%m-%d %H:%M:%S")
-memory_free=$(free -k | egrep "Mem:" | awk '{print $4}' | xargs)
-cpu_idle=$(vmstat | egrep "^\s*[0-9]+\s+" | awk '{print $15}')
-cpu_kernel=$(vmstat | egrep "^\s*[0-9]+\s+" | awk '{print $14}')
-disk_io=$(vmstat -d | egrep "sda" | awk '{print $10}' | xargs)
-disk_available=$(df -BM | egrep "/dev/sda2" | awk '{print $4}' | egrep -o "[0-9]+" | xargs)
+memory_free=$(parse_info "$mem_info" "Mem:" '{print $4}' | xargs)
+cpu_idle=$(parse_info "$cpu_info" "^\s*[0-9]+\s+" '{print $15}')
+cpu_kernel=$(parse_info "$cpu_info" "^\s*[0-9]+\s+" '{print $14}')
+disk_io=$(parse_info "$disk_info" "sda" '{print $10}' | xargs)
+disk_available=$(parse_info "$disk_space" "/dev/sda2" '{print $4}' | egrep -o "[0-9]+" | xargs)
 
 # Construct SQL statement
 read -d '' statement << _END_
