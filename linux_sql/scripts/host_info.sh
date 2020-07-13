@@ -1,6 +1,16 @@
 # !/bin/bash
 # Bash script to collect the hardware information of the host computer
 
+# Function to parse information from a command
+parse_info () {
+
+  string_to_parse=$1
+  search_line=$2
+  awk_command=$3
+
+  echo "$string_to_parse" | egrep "$search_line" | awk "$awk_command"
+}
+
 # Arguments
 psql_host=$1
 psql_port=$2
@@ -18,13 +28,14 @@ fi
 
 # Parse hardware info
 lscpu_out=$(lscpu)
+memory_info=$(cat /proc/meminfo)
 hostname=$(hostname -f)
-cpu_number=$(echo "$lscpu_out"  | egrep "^CPU\(s\):" | awk '{print $2}' | xargs)
-cpu_architecture=$(echo "$lscpu_out"  | egrep "^Architecture:" | awk '{print $2}' | xargs)
-cpu_model=$(echo "$lscpu_out"  | egrep "^Model name:" | awk '{$1=$2=""; print $0}' | xargs)
-cpu_mhz=$(echo "$lscpu_out"  | egrep "^CPU MHz:" | awk '{print $3}' | xargs)
-l2_cache=$(echo "$lscpu_out"  | egrep "^L2 cache" | awk '{print $3}' | egrep -o "[0-9]+" | xargs)
-total_mem=$(cat /proc/meminfo | egrep "MemTotal:" | awk '{print $2}' | xargs)
+cpu_number=$(parse_info "$lscpu_out" "^CPU\(s\):" '{print $2}' | xargs)
+cpu_architecture=$(parse_info "$lscpu_out" "^Architecture:" '{print $2}' | xargs)
+cpu_model=$(parse_info "$lscpu_out" "^Model name:" '{$1=$2=""; print$0}' | xargs)
+cpu_mhz=$(parse_info "$lscpu_out" "^CPU MHz:" '{print $3}' | xargs)
+l2_cache=$(parse_info "$lscpu_out" "^L2 cache" '{print $3}' | egrep -o "[0-9]+" | xargs)
+total_mem=$(parse_info "$memory_info" "MemTotal:" '{print $2}' | xargs)
 timestamp=$(date "+%Y-%m-%d %H:%M:%S")
 
 # Create SQL statement
