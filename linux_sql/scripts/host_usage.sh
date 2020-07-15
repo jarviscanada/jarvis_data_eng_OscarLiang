@@ -1,4 +1,4 @@
-# !/bin/bash
+#!/bin/bash
 # Bash script for collecting usage information to store in database
 
 # Function to parse information from a command

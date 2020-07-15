@@ -1,4 +1,4 @@
-# !/bin/bash
+#!/bin/bash
 # Bash script for creating, starting, and stopping a psql docker container
 
 # Command line arguments
@@ -10,7 +10,7 @@ db_pass=$3
 usage="Usage: ./scripts/psql_docker.sh start|stop|create [db_username][db_password]"
 
 # If docker is not running, start docker
-systemctl status docker || systemctl start docker
+sudo systemctl status docker || sudo systemctl start docker
 
 # Check if docker container exists (value is 2 if exists)
 container_exists=$(docker container ls -a -f name=jrvs-psql | wc -l)

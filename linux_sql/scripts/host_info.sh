@@ -1,4 +1,4 @@
-# !/bin/bash
+#!/bin/bash
 # Bash script to collect the hardware information of the host computer
 
 # Function to parse information from a command
