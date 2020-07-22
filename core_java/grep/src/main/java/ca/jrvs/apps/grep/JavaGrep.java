@@ -16,17 +16,17 @@ public interface JavaGrep {
   /**
    * Traverse a given directory and return all files
    *
-   * @param rootDir
+   * @param rootDir input directory
    * @return files under the rootDir
    */
   List<File> listFiles(String rootDir);
 
   /**
    * Read a file and return all the lines
-   * <p>
+   *
    * Explain FileReader, BufferedReader, and character encoding
    *
-   * @param inputFile fle to be read
+   * @param inputFile file to be read
    * @return lines
    * @throws IllegalArgumentException if a given inputFile is not a file
    */
@@ -42,7 +42,7 @@ public interface JavaGrep {
 
   /**
    * Write lines to a file
-   * <p>
+   *
    * Explore: FileOutputStream, OutputStreamWriter, and BufferedWriter
    *
    * @param lines matched line
