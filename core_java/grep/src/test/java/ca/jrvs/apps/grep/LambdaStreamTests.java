@@ -5,7 +5,9 @@ import ca.jrvs.apps.practice.LambdaStreamExcImp;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
@@ -212,5 +214,24 @@ public class LambdaStreamTests {
     System.out.flush();
     System.setOut(old);
     Assert.assertEquals("Unexpected message output", "msg:1!\nmsg:3!\nmsg:5!\n", baos.toString());
+  }
+
+  @Test
+  public void flatMapTest() {
+    LambdaStreamExc l = new LambdaStreamExcImp();
+    List<List<Integer>> lists = new ArrayList<>();
+    for (int i = 0; i < 5; i++) {
+      List<Integer> list = new ArrayList<>();
+      list.add(i);
+      lists.add(list);
+    }
+    Stream<Integer> intStream = l.flatNestedInt(lists.stream());
+    int n = 0;
+    Iterator<Integer> it = intStream.iterator();
+    while (it.hasNext()) {
+      Assert.assertEquals("Unexpected squared value", n * n, (int) it.next());
+      n++;
+    }
+    Assert.assertEquals("Unexpected number of stream elements", n, 5);
   }
 }

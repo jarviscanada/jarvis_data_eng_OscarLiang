@@ -61,7 +61,7 @@ public class LambdaStreamExcImp implements LambdaStreamExc {
   @Override
   public IntStream getOdd(IntStream intStream) {
     return intStream.filter(number -> {
-        return number % 2 == 1;
+      return number % 2 == 1;
     });
   }
 
@@ -83,7 +83,12 @@ public class LambdaStreamExcImp implements LambdaStreamExc {
   @Override
   public void printOdd(IntStream intStream, Consumer<String> printer) {
     getOdd(intStream).forEach(n -> {
-        printer.accept(((Integer)n).toString());
+      printer.accept(((Integer) n).toString());
     });
+  }
+
+  @Override
+  public Stream<Integer> flatNestedInt(Stream<List<Integer>> ints) {
+    return ints.flatMap(list -> list.stream().map(n -> n * n));
   }
 }

@@ -115,4 +115,5 @@ public interface LambdaStreamExc {
    * @param ints
    * @return
    */
+  Stream<Integer> flatNestedInt(Stream<List<Integer>> ints);
 }
