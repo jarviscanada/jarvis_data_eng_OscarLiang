@@ -41,8 +41,7 @@ public class JavaGrepLambdaImp extends JavaGrepImp {
     Arrays.asList(dirFiles).stream().forEach(file -> {
       if (file.isDirectory()) {
         files.addAll(listFiles(file.getAbsolutePath()));
-      }
-      else {
+      } else {
         files.add(file);
       }
     });
