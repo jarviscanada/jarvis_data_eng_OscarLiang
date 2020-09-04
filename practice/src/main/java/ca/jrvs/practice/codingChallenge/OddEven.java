@@ -6,16 +6,14 @@ package ca.jrvs.practice.codingChallenge;
 public class OddEven {
 
   /**
-   * Time complexity: O(1)
-   * Justification: Arithmetic operation
+   * Time complexity: O(1) Justification: Arithmetic operation
    */
   public String oddEvenMod(int i) {
     return i % 2 == 0 ? "even" : "odd";
   }
 
   /**
-   * Time complexity: O(1)
-   * Justification: Function uses a single bit operation
+   * Time complexity: O(1) Justification: Function uses a single bit operation
    */
   public String oddEvenBit(int i) {
     return (i & 1) == 0 ? "even" : "odd";
