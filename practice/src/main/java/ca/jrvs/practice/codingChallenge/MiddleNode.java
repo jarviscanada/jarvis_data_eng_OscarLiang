@@ -1,13 +1,27 @@
 package ca.jrvs.practice.codingChallenge;
 
+/**
+ * ticket: https://www.notion.so/Middle-of-the-Linked-List-b3e85f4b8b6349a2912384fa18df19e3
+ */
 public class MiddleNode {
 
   public static class ListNode {
     int val;
     ListNode next;
     ListNode() {}
-    ListNode(int val) { this.val = val; }
+    ListNode(int val) { this.val = val; this.next = null; }
     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+  }
+
+  public ListNode head;
+
+  public void generateList(int[] array) {
+    head = new ListNode(array[0]);
+    ListNode next = head;
+    for (int i = 1; i < array.length; i++) {
+      next.next = new ListNode(array[i]);
+      next = next.next;
+    }
   }
 
   /**
