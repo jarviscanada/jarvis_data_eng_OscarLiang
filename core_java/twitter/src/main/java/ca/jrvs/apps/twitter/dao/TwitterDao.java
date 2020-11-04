@@ -3,10 +3,12 @@ package ca.jrvs.apps.twitter.dao;
 import ca.jrvs.apps.twitter.dao.helper.HttpHelper;
 import ca.jrvs.apps.twitter.dao.helper.JsonUtils;
 import ca.jrvs.apps.twitter.dao.helper.TwitterHttpHelper;
+import ca.jrvs.apps.twitter.model.Coordinates;
 import ca.jrvs.apps.twitter.model.Tweet;
 import com.google.gdata.util.common.base.PercentEscaper;
 import java.io.IOException;
 import java.net.URI;
+import java.util.List;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.protocol.HTTP;
@@ -31,9 +33,6 @@ public class TwitterDao implements CrdDao<Tweet, String> {
   @Autowired
   public TwitterDao(HttpHelper httpHelper) { this.httpHelper = httpHelper; }
 
-  public static void main(String[] args) {
-
-  }
   /**
    * Create an entity (Tweet) for the underlying storage
    *
@@ -43,8 +42,16 @@ public class TwitterDao implements CrdDao<Tweet, String> {
   @Override
   public Tweet create(Tweet entity) {
     PercentEscaper percentEscaper = new PercentEscaper("", false);
+    // Check if tweet has coordinates
+    String coordinatesString = "";
+    Coordinates coordinates = entity.getCoordinates();
+    if (coordinates != null) {
+      List<Double> coordinateValues = coordinates.getCoordinates();
+      coordinatesString = AMPERSAND + "long" + EQUAL + coordinateValues.get(0) + AMPERSAND + "lat" +
+          EQUAL + coordinateValues.get(1);
+    }
     String uri = API_BASE_URI + POST_PATH + QUERY_SYM + "status" + EQUAL +
-        percentEscaper.escape(entity.getText());
+        percentEscaper.escape(entity.getText()) + coordinatesString;
     HttpResponse response = httpHelper.httpPost(URI.create(uri));
 
     return checkTweet(response, HTTP_OK);
