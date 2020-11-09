@@ -49,7 +49,7 @@ public class TwitterService implements Service {
     if (!validateId(id)) {
       throw new IllegalArgumentException("Invalid Tweet ID: " + id);
     }
-    return null;
+    return (Tweet) dao.findById(id);
   }
 
   /**
