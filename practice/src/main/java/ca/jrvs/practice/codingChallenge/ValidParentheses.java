@@ -1,6 +1,5 @@
 package ca.jrvs.practice.codingChallenge;
 
-import java.util.EmptyStackException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
@@ -11,8 +10,8 @@ import java.util.Stack;
 public class ValidParentheses {
 
   /**
-   * Time complexity: O(n)
-   * Iterates through the entire string and performs O(1) operations on each character.
+   * Time complexity: O(n) Iterates through the entire string and performs O(1) operations on each
+   * character.
    */
   public boolean isValid(String s) {
     Stack<Character> stack = new Stack<>();
