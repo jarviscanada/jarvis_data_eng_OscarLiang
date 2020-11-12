@@ -27,7 +27,7 @@ public class TwitterCLIApp {
 
     HttpHelper helper = new TwitterHttpHelper(consumerKey, consumerSecret, accessToken,
         tokenSecret);
-    CrdDao dao = new TwitterDao(helper);
+    CrdDao<Tweet, String> dao = new TwitterDao(helper);
     Service service = new TwitterService(dao);
     Controller controller = new TwitterController(service);
     TwitterCLIApp app = new TwitterCLIApp(controller);

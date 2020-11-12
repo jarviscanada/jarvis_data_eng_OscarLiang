@@ -36,7 +36,7 @@ public class TwitterController implements Controller {
     } catch (NumberFormatException e) {
       throw new IllegalArgumentException("Invalid argument: latitude/longitude is not a number. "
           + "USAGE: TwitterCLIApp post \"tweet text\" \"latitude:longitude\"");
-    } catch (NullPointerException e) {
+    } catch (NullPointerException | ArrayIndexOutOfBoundsException e) {
       throw new IllegalArgumentException("Invalid argument: latitude/longitude incorrectly "
           + "formatted. USAGE: TwitterCLIApp post \"tweet text\" \"latitude:longitude\"");
     }

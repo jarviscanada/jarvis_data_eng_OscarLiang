@@ -8,9 +8,9 @@ import java.util.regex.Pattern;
 
 public class TwitterService implements Service {
 
-  private CrdDao dao;
+  private CrdDao<Tweet, String> dao;
 
-  public TwitterService(CrdDao dao) { this.dao = dao; }
+  public TwitterService(CrdDao<Tweet, String> dao) { this.dao = dao; }
   /**
    * Validate and post a user input Tweet
    *
