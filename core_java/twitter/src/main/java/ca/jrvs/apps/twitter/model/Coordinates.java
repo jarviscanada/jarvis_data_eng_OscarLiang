@@ -6,6 +6,7 @@ import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Coordinates {
+
   @JsonProperty("coordinates")
   List<Double> coordinates;
   @JsonProperty("type")

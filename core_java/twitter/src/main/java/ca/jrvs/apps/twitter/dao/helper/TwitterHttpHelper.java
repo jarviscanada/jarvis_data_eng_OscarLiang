@@ -11,19 +11,19 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
+@Component
 public class TwitterHttpHelper implements HttpHelper {
 
-  private OAuthConsumer consumer;
-  private HttpClient httpClient;
+  private final OAuthConsumer consumer;
+  private final HttpClient httpClient;
   final Logger logger = LoggerFactory.getLogger(HttpHelper.class);
 
   /**
-   * Constructor
-   * Setup dependencies using secrets
+   * Constructor Setup dependencies using secrets
    *
    * @param consumerKey
    * @param consumerSecret
@@ -37,6 +37,21 @@ public class TwitterHttpHelper implements HttpHelper {
     /**
      * Default = single connection. Discuss source code if time permits
      */
+    httpClient = new DefaultHttpClient();
+  }
+
+  /**
+   * Default constructor (not used for now)
+   */
+  public TwitterHttpHelper() {
+    String consumerKey = System.getenv("consumerKey");
+    String consumerSecret = System.getenv("consumerSecret");
+    String accessToken = System.getenv("accessToken");
+    String tokenSecret = System.getenv("tokenSecret");
+
+    consumer = new CommonsHttpOAuthConsumer(consumerKey,
+        consumerSecret);
+    consumer.setTokenWithSecret(accessToken, tokenSecret);
     httpClient = new DefaultHttpClient();
   }
 

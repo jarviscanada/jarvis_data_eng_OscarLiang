@@ -1,9 +1,9 @@
 package ca.jrvs.apps.twitter.dao;
 
 import ca.jrvs.apps.twitter.dao.helper.HttpHelper;
-import ca.jrvs.apps.twitter.utils.JsonUtils;
 import ca.jrvs.apps.twitter.model.Coordinates;
 import ca.jrvs.apps.twitter.model.Tweet;
+import ca.jrvs.apps.twitter.utils.JsonUtils;
 import com.google.gdata.util.common.base.PercentEscaper;
 import java.io.IOException;
 import java.net.URI;
@@ -12,7 +12,9 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class TwitterDao implements CrdDao<Tweet, String> {
 
   private static final String API_BASE_URI = "https://api.twitter.com";
@@ -26,10 +28,12 @@ public class TwitterDao implements CrdDao<Tweet, String> {
 
   private static final int HTTP_OK = 200;
 
-  private HttpHelper httpHelper;
+  private final HttpHelper httpHelper;
 
   @Autowired
-  public TwitterDao(HttpHelper httpHelper) { this.httpHelper = httpHelper; }
+  public TwitterDao(HttpHelper httpHelper) {
+    this.httpHelper = httpHelper;
+  }
 
   /**
    * Create an entity (Tweet) for the underlying storage
@@ -77,13 +81,13 @@ public class TwitterDao implements CrdDao<Tweet, String> {
    */
   @Override
   public Tweet deleteById(String s) {
-    String uri = API_BASE_URI + DELETE_PATH + "/" +  s + ".json";
+    String uri = API_BASE_URI + DELETE_PATH + "/" + s + ".json";
     HttpResponse response = httpHelper.httpPost(URI.create(uri));
 
     return checkTweet(response, HTTP_OK);
   }
 
-  private Tweet checkTweet (HttpResponse response, Integer expectedStatusCode) {
+  private Tweet checkTweet(HttpResponse response, Integer expectedStatusCode) {
     int actualStatusCode = response.getStatusLine().getStatusCode();
     if (actualStatusCode != expectedStatusCode) {
       throw new RuntimeException("Unexpected status code: " + actualStatusCode);

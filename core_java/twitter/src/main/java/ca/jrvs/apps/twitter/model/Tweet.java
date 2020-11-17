@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Tweet {
+
   @JsonProperty("created_at")
   String createdAt;
   @JsonProperty("id")

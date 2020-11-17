@@ -11,14 +11,14 @@ public interface Service {
    * @param tweet tweet to be created
    * @return created tweet
    * @throws IllegalArgumentException if text exceeds max number of allowed characters or lat/long
-   *         out of range
+   *                                  out of range
    */
   Tweet postTweet(Tweet tweet);
 
   /**
    * Search a tweet by ID
    *
-   * @param id tweet id
+   * @param id     tweet id
    * @param fields set fields not in the list to null
    * @return Tweet object which is returned by the Twitter API
    * @throws IllegalArgumentException if id or fields param is invalid

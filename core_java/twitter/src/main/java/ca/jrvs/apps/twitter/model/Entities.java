@@ -6,6 +6,7 @@ import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Entities {
+
   @JsonProperty("hashtags")
   List<Hashtag> hashtags;
   @JsonProperty("user_mentions")

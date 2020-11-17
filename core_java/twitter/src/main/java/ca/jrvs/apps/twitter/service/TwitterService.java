@@ -5,12 +5,18 @@ import ca.jrvs.apps.twitter.model.Tweet;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
+import org.springframework.beans.factory.annotation.Autowired;
 
+@org.springframework.stereotype.Service
 public class TwitterService implements Service {
 
-  private CrdDao<Tweet, String> dao;
+  private final CrdDao<Tweet, String> dao;
 
-  public TwitterService(CrdDao<Tweet, String> dao) { this.dao = dao; }
+  @Autowired
+  public TwitterService(CrdDao<Tweet, String> dao) {
+    this.dao = dao;
+  }
+
   /**
    * Validate and post a user input Tweet
    *
@@ -33,7 +39,7 @@ public class TwitterService implements Service {
     if (coordinates.get(1) < -90d || coordinates.get(1) > 90d) {
       throw new IllegalArgumentException("Invalid value for latitude (must be between -90 and 90)");
     }
-    return (Tweet) dao.create(tweet);
+    return dao.create(tweet);
   }
 
   /**
@@ -49,7 +55,7 @@ public class TwitterService implements Service {
     if (!validateId(id)) {
       throw new IllegalArgumentException("Invalid Tweet ID: " + id);
     }
-    return (Tweet) dao.findById(id);
+    return dao.findById(id);
   }
 
   /**
@@ -67,8 +73,8 @@ public class TwitterService implements Service {
       }
     }
     List<Tweet> deletedTweets = new ArrayList<>();
-    for (String id: ids) {
-      deletedTweets.add((Tweet) dao.deleteById(id));
+    for (String id : ids) {
+      deletedTweets.add(dao.deleteById(id));
     }
     return deletedTweets;
   }
