@@ -1,12 +1,13 @@
 package ca.jrvs.apps.twitter.dao.helper;
 
+import static org.junit.Assert.*;
+
 import java.net.URI;
-import junit.framework.TestCase;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
 import org.junit.Test;
 
-public class TwitterHttpHelperTest extends TestCase {
+public class TwitterHttpHelperTest {
 
   @Test
   public void httpPost() throws Exception {
