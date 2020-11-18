@@ -87,7 +87,7 @@ public class TwitterDao implements CrdDao<Tweet, String> {
     return checkTweet(response, HTTP_OK);
   }
 
-  private Tweet checkTweet(HttpResponse response, Integer expectedStatusCode) {
+  protected Tweet checkTweet(HttpResponse response, Integer expectedStatusCode) {
     int actualStatusCode = response.getStatusLine().getStatusCode();
     if (actualStatusCode != expectedStatusCode) {
       throw new RuntimeException("Unexpected status code: " + actualStatusCode);
