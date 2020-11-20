@@ -12,10 +12,10 @@ import org.apache.http.util.EntityUtils;
 
 public class TwitterApiTest {
 
-  private static String CONSUMER_KEY = System.getenv("consumerKey");
-  private static String CONSUMER_SECRET = System.getenv("consumerSecret");
-  private static String ACCESS_TOKEN = System.getenv("accessToken");
-  private static String TOKEN_SECRET = System.getenv("tokenSecret");
+  private static final String CONSUMER_KEY = System.getenv("consumerKey");
+  private static final String CONSUMER_SECRET = System.getenv("consumerSecret");
+  private static final String ACCESS_TOKEN = System.getenv("accessToken");
+  private static final String TOKEN_SECRET = System.getenv("tokenSecret");
 
   public static void main(String[] args) throws Exception {
 
@@ -26,7 +26,8 @@ public class TwitterApiTest {
     // create an HTTP GET request
     String status = "today is a good day";
     PercentEscaper percentEscaper = new PercentEscaper("", false);
-    HttpPost request = new HttpPost("https://api.twitter.com/1.1/statuses/update.json?status=" + percentEscaper.escape(status));
+    HttpPost request = new HttpPost(
+        "https://api.twitter.com/1.1/statuses/update.json?status=" + percentEscaper.escape(status));
 
     // sign the request (add headers)
     consumer.sign(request);

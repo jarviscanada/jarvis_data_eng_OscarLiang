@@ -1,12 +1,13 @@
 package ca.jrvs.apps.practice;
 
-import java.util.regex.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RegexExcImp implements RegexExc {
 
-  private static String jpegRegex = "^\\S+\\.jpe?g$";
-  private static String ipRegex = "^(\\d?\\d?\\d\\.){3}\\d?\\d?\\d$";
-  private static String emptyRegex = "^\\s*$";
+  private static final String jpegRegex = "^\\S+\\.jpe?g$";
+  private static final String ipRegex = "^(\\d?\\d?\\d\\.){3}\\d?\\d?\\d$";
+  private static final String emptyRegex = "^\\s*$";
 
   public static void main(String[] args) {
     String jpegString = "picture.jpeg";

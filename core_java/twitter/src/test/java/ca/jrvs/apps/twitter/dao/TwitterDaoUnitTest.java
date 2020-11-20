@@ -1,6 +1,8 @@
 package ca.jrvs.apps.twitter.dao;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.isNotNull;
@@ -8,8 +10,8 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 
 import ca.jrvs.apps.twitter.dao.helper.HttpHelper;
-import ca.jrvs.apps.twitter.utils.JsonUtils;
 import ca.jrvs.apps.twitter.model.Tweet;
+import ca.jrvs.apps.twitter.utils.JsonUtils;
 import ca.jrvs.apps.twitter.utils.TweetUtils;
 import org.junit.Before;
 import org.junit.Test;

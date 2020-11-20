@@ -44,7 +44,7 @@ public class JavaGrepImp implements JavaGrep {
   @Override
   public void process() throws IOException {
     List<String> matchedLines = new ArrayList<String>();
-    List<File> allFiles = listFiles(this.getRootPath());
+    List<File> allFiles = listFiles(getRootPath());
     for (File f : allFiles) {
       List<String> fileLines = readLines(f);
       for (String line : fileLines) {
@@ -87,19 +87,19 @@ public class JavaGrepImp implements JavaGrep {
     } catch (FileNotFoundException ex) {
       throw new IllegalArgumentException("Input argument is not a file.");
     } catch (IOException ex) {
-      this.logger.error(ex.getMessage(), ex);
+      logger.error(ex.getMessage(), ex);
     }
     return lines;
   }
 
   @Override
   public boolean containsPattern(String line) {
-    return Pattern.compile(this.getRegex()).matcher(line).matches();
+    return Pattern.compile(getRegex()).matcher(line).matches();
   }
 
   @Override
   public void writeToFile(List<String> lines) throws IOException {
-    File newFile = new File(this.getOutFile());
+    File newFile = new File(getOutFile());
     OutputStream os = new FileOutputStream(newFile);
     BufferedWriter out = new BufferedWriter(new OutputStreamWriter(os));
     for (String l : lines) {
@@ -110,7 +110,7 @@ public class JavaGrepImp implements JavaGrep {
 
   @Override
   public String getRootPath() {
-    return this.rootPath;
+    return rootPath;
   }
 
   @Override
@@ -120,7 +120,7 @@ public class JavaGrepImp implements JavaGrep {
 
   @Override
   public String getRegex() {
-    return this.regex;
+    return regex;
   }
 
   @Override
@@ -130,7 +130,7 @@ public class JavaGrepImp implements JavaGrep {
 
   @Override
   public String getOutFile() {
-    return this.outFile;
+    return outFile;
   }
 
   @Override

@@ -12,13 +12,13 @@ public class DatabaseConnectionManager {
 
   public DatabaseConnectionManager(String host, String databaseName, String username,
       String password) {
-    this.url = "jdbc:postgresql://" + host + "/" + databaseName;
-    this.properties = new Properties();
-    this.properties.setProperty("user", username);
-    this.properties.setProperty("password", password);
+    url = "jdbc:postgresql://" + host + "/" + databaseName;
+    properties = new Properties();
+    properties.setProperty("user", username);
+    properties.setProperty("password", password);
   }
 
   public Connection getConnection() throws SQLException {
-    return DriverManager.getConnection(this.url, this.properties);
+    return DriverManager.getConnection(url, properties);
   }
 }
