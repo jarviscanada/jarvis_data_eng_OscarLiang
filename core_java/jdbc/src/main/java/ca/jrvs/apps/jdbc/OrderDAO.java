@@ -1,7 +1,6 @@
 package ca.jrvs.apps.jdbc;
 
 import ca.jrvs.apps.jdbc.util.DataAccessObject;
-import ca.jrvs.apps.jdbc.util.DataTransferObject;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,7 +19,9 @@ public class OrderDAO extends DataAccessObject<Order> {
       "JOIN product p ON ol.product_id = p.product_id " +
       "WHERE o.order_id = ?";
 
-  public OrderDAO(Connection connection) { super(connection); }
+  public OrderDAO(Connection connection) {
+    super(connection);
+  }
 
   @Override
   public Order findById(long id) {

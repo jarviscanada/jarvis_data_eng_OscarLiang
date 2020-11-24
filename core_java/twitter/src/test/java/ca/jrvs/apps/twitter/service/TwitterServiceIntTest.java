@@ -1,6 +1,9 @@
 package ca.jrvs.apps.twitter.service;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import ca.jrvs.apps.twitter.dao.CrdDao;
 import ca.jrvs.apps.twitter.dao.TwitterDao;
@@ -12,8 +15,6 @@ import ca.jrvs.apps.twitter.utils.TweetUtils;
 import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 
 public class TwitterServiceIntTest {
 
@@ -26,7 +27,8 @@ public class TwitterServiceIntTest {
     String accessToken = System.getenv("accessToken");
     String tokenSecret = System.getenv("tokenSecret");
 
-    HttpHelper helper = new TwitterHttpHelper(consumerKey, consumerSecret, accessToken, tokenSecret);
+    HttpHelper helper = new TwitterHttpHelper(consumerKey, consumerSecret, accessToken,
+        tokenSecret);
     CrdDao dao = new TwitterDao(helper);
     this.service = new TwitterService(dao);
   }

@@ -13,6 +13,7 @@ public class LinkedJList<E> implements JList<E> {
   }
 
   private static class Node<E> {
+
     E item;
     Node<E> prev;
     Node<E> next;

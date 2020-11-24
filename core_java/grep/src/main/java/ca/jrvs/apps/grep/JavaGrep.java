@@ -23,7 +23,7 @@ public interface JavaGrep {
 
   /**
    * Read a file and return all the lines
-   *
+   * <p>
    * Explain FileReader, BufferedReader, and character encoding
    *
    * @param inputFile file to be read
@@ -42,7 +42,7 @@ public interface JavaGrep {
 
   /**
    * Write lines to a file
-   *
+   * <p>
    * Explore: FileOutputStream, OutputStreamWriter, and BufferedWriter
    *
    * @param lines matched line

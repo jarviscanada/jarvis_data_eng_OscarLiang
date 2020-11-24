@@ -10,6 +10,7 @@ public class JTreeSet<E> implements JSet<E> {
   JTreeSet() {
     tree = new TreeMap<>();
   }
+
   /**
    * Returns the number of elements in this set (its cardinality). If this set contains more than
    * <tt>Integer.MAX_VALUE</tt> elements, returns

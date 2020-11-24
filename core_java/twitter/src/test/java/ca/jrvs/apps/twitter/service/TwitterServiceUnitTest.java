@@ -1,25 +1,23 @@
 package ca.jrvs.apps.twitter.service;
 
-import static org.junit.Assert.*;
-import static org.mockito.ArgumentMatchers.isNotNull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import static org.mockito.ArgumentMatchers.notNull;
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 
 import ca.jrvs.apps.twitter.dao.CrdDao;
-import ca.jrvs.apps.twitter.dao.TwitterDao;
 import ca.jrvs.apps.twitter.model.Tweet;
 import ca.jrvs.apps.twitter.utils.JsonUtils;
 import ca.jrvs.apps.twitter.utils.TweetUtils;
 import java.io.IOException;
 import java.util.List;
-import net.bytebuddy.pool.TypePool.Resolution.Illegal;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -142,12 +140,12 @@ public class TwitterServiceUnitTest {
   public void deleteTweets() {
     when(dao.deleteById(notNull())).thenReturn(this.expectedTweet);
     try {
-      service.deleteTweets(new String[] {"123123123", "1252957219", "24215k123123", "12091752"});
+      service.deleteTweets(new String[]{"123123123", "1252957219", "24215k123123", "12091752"});
       fail();
     } catch (IllegalArgumentException e) {
       assertTrue(true);
     }
-    List<Tweet> resultTweets = service.deleteTweets(new String[] {"1097607853932564480",
+    List<Tweet> resultTweets = service.deleteTweets(new String[]{"1097607853932564480",
         "109284124124124"});
     assertEquals(2, resultTweets.size());
     assertNotNull(resultTweets.get(1));

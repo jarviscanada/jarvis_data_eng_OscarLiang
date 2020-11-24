@@ -1,16 +1,17 @@
 package ca.jrvs.apps.twitter.controller;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import ca.jrvs.apps.twitter.dao.CrdDao;
 import ca.jrvs.apps.twitter.dao.TwitterDao;
 import ca.jrvs.apps.twitter.dao.helper.HttpHelper;
 import ca.jrvs.apps.twitter.dao.helper.TwitterHttpHelper;
-import ca.jrvs.apps.twitter.model.Coordinates;
 import ca.jrvs.apps.twitter.model.Tweet;
 import ca.jrvs.apps.twitter.service.Service;
 import ca.jrvs.apps.twitter.service.TwitterService;
-import ca.jrvs.apps.twitter.utils.TweetUtils;
 import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,7 +27,8 @@ public class TwitterControllerIntTest {
     String accessToken = System.getenv("accessToken");
     String tokenSecret = System.getenv("tokenSecret");
 
-    HttpHelper helper = new TwitterHttpHelper(consumerKey, consumerSecret, accessToken, tokenSecret);
+    HttpHelper helper = new TwitterHttpHelper(consumerKey, consumerSecret, accessToken,
+        tokenSecret);
     CrdDao dao = new TwitterDao(helper);
     Service service = new TwitterService(dao);
     this.controller = new TwitterController(service);
@@ -84,7 +86,8 @@ public class TwitterControllerIntTest {
       tweetIdsString.append(",");
     }
     tweetIdsString.deleteCharAt(tweetIdsString.lastIndexOf(","));
-    List<Tweet> deletedTweets = controller.deleteTweet(new String[]{"delete", tweetIdsString.toString()});
+    List<Tweet> deletedTweets = controller
+        .deleteTweet(new String[]{"delete", tweetIdsString.toString()});
 
     for (int i = 0; i < numTweets; i++) {
       Tweet currentTweet = deletedTweets.get(i);

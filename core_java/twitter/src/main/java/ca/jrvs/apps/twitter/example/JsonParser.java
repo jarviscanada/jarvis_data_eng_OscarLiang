@@ -11,6 +11,7 @@ public class JsonParser {
 
   /**
    * Convert a java object to JSON string
+   *
    * @param object input object
    * @return JSON String
    * @throws JsonProcessingException
@@ -29,9 +30,10 @@ public class JsonParser {
 
   /**
    * Parse JSON string to an object
-   * @param json JSON str
+   *
+   * @param json  JSON str
    * @param clazz object class
-   * @param <T> Type
+   * @param <T>   Type
    * @return Object
    * @throws IOException
    */

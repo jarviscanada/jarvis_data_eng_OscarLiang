@@ -8,7 +8,7 @@ public interface RegexExc {
    * @param filename
    * @return
    */
-  public boolean matchJpeg(String filename);
+  boolean matchJpeg(String filename);
 
   /**
    * return true if ip is valid assume IP address range is from 0.0.0.0 to 999.999.999.999
@@ -16,7 +16,7 @@ public interface RegexExc {
    * @param ip
    * @return
    */
-  public boolean matchIp(String ip);
+  boolean matchIp(String ip);
 
   /**
    * return true if line is empty (e.g. empty, white space, tabs, etc..)
@@ -24,5 +24,5 @@ public interface RegexExc {
    * @param line
    * @return
    */
-  public boolean isEmptyLine(String line);
+  boolean isEmptyLine(String line);
 }

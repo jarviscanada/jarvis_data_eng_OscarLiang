@@ -58,7 +58,7 @@ public class JavaGrepLambdaImp extends JavaGrepImp {
     } catch (FileNotFoundException ex) {
       throw new IllegalArgumentException("Input argument is not a file.");
     } catch (IOException ex) {
-      this.logger.error(ex.getMessage(), ex);
+      logger.error(ex.getMessage(), ex);
     }
     return lines;
   }
