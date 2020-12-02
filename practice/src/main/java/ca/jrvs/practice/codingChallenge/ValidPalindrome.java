@@ -6,8 +6,7 @@ package ca.jrvs.practice.codingChallenge;
 public class ValidPalindrome {
 
   /**
-   * Time complexity: O(n)
-   * Iterate through the string from both sides in O(n) time.
+   * Time complexity: O(n) Iterate through the string from both sides in O(n) time.
    */
   public boolean isPalindromePointers(String s) {
     String alphanumeric = s.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
@@ -24,9 +23,8 @@ public class ValidPalindrome {
   }
 
   /**
-   * Time complexity: O(n)
-   * Space complexity: O(n)
-   * Call a constant time function n/2 times for O(n) time and space complexity.
+   * Time complexity: O(n) Space complexity: O(n) Call a constant time function n/2 times for O(n)
+   * time and space complexity.
    */
   public boolean isPalindromeRecursion(String s) {
     String alphanumeric = s.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();

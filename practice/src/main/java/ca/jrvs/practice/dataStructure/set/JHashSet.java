@@ -2,7 +2,7 @@ package ca.jrvs.practice.dataStructure.set;
 
 import java.util.HashMap;
 
-public class JHashSet<E> implements JSet<E>{
+public class JHashSet<E> implements JSet<E> {
 
   HashMap<E, Object> map;
 
