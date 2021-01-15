@@ -1,6 +1,7 @@
 package ca.jrvs.apps.trading.dao;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import ca.jrvs.apps.trading.TestConfig;
 import ca.jrvs.apps.trading.model.domain.Quote;
@@ -29,9 +30,9 @@ public class QuoteDaoIntTest {
   public void insertOne() {
     savedQuote = new Quote();
     savedQuote.setAskPrice(10d);
-    savedQuote.setAskSize(10);
+    savedQuote.setAskSize(10L);
     savedQuote.setBidPrice(10.2d);
-    savedQuote.setBidSize(10);
+    savedQuote.setBidSize(10L);
     savedQuote.setId("AAPL");
     savedQuote.setLastPrice(10.1d);
     quoteDao.save(savedQuote);
@@ -46,9 +47,9 @@ public class QuoteDaoIntTest {
   public void save() {
     Quote testQuote = new Quote();
     testQuote.setAskPrice(15d);
-    testQuote.setAskSize(20);
+    testQuote.setAskSize(20L);
     testQuote.setBidPrice(12d);
-    testQuote.setBidSize(11);
+    testQuote.setBidSize(11L);
     testQuote.setId("MSFT");
     testQuote.setLastPrice(13.1d);
     quoteDao.save(testQuote);
@@ -60,17 +61,17 @@ public class QuoteDaoIntTest {
   public void testSaveAll() {
     Quote testQuote1 = new Quote();
     testQuote1.setAskPrice(15d);
-    testQuote1.setAskSize(20);
+    testQuote1.setAskSize(20L);
     testQuote1.setBidPrice(12d);
-    testQuote1.setBidSize(11);
+    testQuote1.setBidSize(11L);
     testQuote1.setId("MSFT");
     testQuote1.setLastPrice(13.1d);
 
     Quote testQuote2 = new Quote();
     testQuote2.setAskPrice(15d);
-    testQuote2.setAskSize(20);
+    testQuote2.setAskSize(20L);
     testQuote2.setBidPrice(12d);
-    testQuote2.setBidSize(11);
+    testQuote2.setBidSize(11L);
     testQuote2.setId("FB");
     testQuote2.setLastPrice(13.1d);
     quoteDao.saveAll(Arrays.asList(testQuote1, testQuote2));
