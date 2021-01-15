@@ -1,6 +1,8 @@
 package ca.jrvs.apps.trading.dao;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import ca.jrvs.apps.trading.TestConfig;
 import ca.jrvs.apps.trading.model.domain.Trader;
@@ -20,7 +22,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {TestConfig.class})
 @Sql({"classpath:schema.sql"})
-public class TraderDaoTest {
+public class TraderDaoIntTest {
 
   @Autowired
   private TraderDao traderDao;
@@ -67,5 +69,11 @@ public class TraderDaoTest {
   @Test
   public void count() {
     assertEquals(1, traderDao.count());
+  }
+
+  @Test
+  public void deleteById() {
+    traderDao.deleteById(savedTrader.getId());
+    assertEquals(0, traderDao.count());
   }
 }

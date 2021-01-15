@@ -59,7 +59,8 @@ public class TraderDao extends JdbcCrudDao<Trader> {
 
   @Override
   public <S extends Trader> Iterable<S> saveAll(Iterable<S> entities) {
-    throw new UnsupportedOperationException("Not implemented");
+    entities.forEach(this::save);
+    return entities;
   }
 
   @Override
