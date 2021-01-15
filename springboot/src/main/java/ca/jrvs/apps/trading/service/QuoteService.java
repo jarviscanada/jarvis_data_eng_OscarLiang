@@ -1,6 +1,7 @@
 package ca.jrvs.apps.trading.service;
 
 import ca.jrvs.apps.trading.dao.MarketDataDao;
+import ca.jrvs.apps.trading.dao.QuoteDao;
 import ca.jrvs.apps.trading.model.domain.IexQuote;
 import javax.transaction.Transactional;
 import org.slf4j.Logger;
@@ -11,15 +12,15 @@ import org.springframework.stereotype.Service;
 @Transactional
 @Service
 public class QuoteService {
+
   private static final Logger logger = LoggerFactory.getLogger(QuoteService.class);
 
-  //private QuoteDao quoteDao;
-  private MarketDataDao marketDataDao;
+  private final QuoteDao quoteDao;
+  private final MarketDataDao marketDataDao;
 
   @Autowired
-  //public QuoteService(QuoteDao quoteDao, MarketDataDao marketDataDao) {
-  public QuoteService(MarketDataDao marketDataDao) {
-    //this.quoteDao = quoteDao;
+  public QuoteService(QuoteDao quoteDao, MarketDataDao marketDataDao) {
+    this.quoteDao = quoteDao;
     this.marketDataDao = marketDataDao;
   }
 
