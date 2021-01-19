@@ -9,6 +9,7 @@ import ca.jrvs.apps.trading.model.domain.Account;
 import ca.jrvs.apps.trading.model.domain.Position;
 import ca.jrvs.apps.trading.model.domain.Quote;
 import ca.jrvs.apps.trading.model.domain.SecurityOrder;
+import java.util.Optional;
 import javax.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,13 +40,11 @@ public class OrderService {
 
   /**
    * Execute a market order
-   *
-   * - validate the order (e.g. size and ticker)
-   * - Create a securityOrder (for security_order table)
-   * - Handle buy or sell order
-   * - buy order : check acount balance (calls helper method)
-   * - selll order: check position for the ticker/symbol (calls helper method)
-   * - update securityOrder.status
+   * <p>
+   * - validate the order (e.g. size and ticker) - Create a securityOrder (for security_order table)
+   * - Handle buy or sell order - buy order : check acount balance (calls helper method) - selll
+   * order: check position for the ticker/symbol (calls helper method) - update
+   * securityOrder.status
    *
    * @param orderDto market order
    * @return SecurityOrder from security_order table
@@ -64,7 +63,7 @@ public class OrderService {
     Account account = new Account();
     try {
       account = accountDao.findById(orderDto.getAccountId()).get();
-    } catch (DataAccessException ex) {
+    } catch (DataAccessException e) {
       logger.error("Invalid account id: " + orderDto.getAccountId());
     }
     SecurityOrder securityOrder = new SecurityOrder();
@@ -93,7 +92,13 @@ public class OrderService {
    */
   private void handleBuyMarketOrder(MarketOrderDto marketOrderDto, SecurityOrder securityOrder,
       Account account) {
-    Quote quote = quoteDao.findById(marketOrderDto.getTicker()).get();
+    Optional<Quote> quoteOptional = quoteDao.findById(marketOrderDto.getTicker());
+    Quote quote;
+    if (quoteOptional.isPresent()) {
+      quote = quoteOptional.get();
+    } else {
+      throw new IllegalArgumentException("Could not find ticker");
+    }
     securityOrder.setPrice(quote.getAskPrice());
     double price = securityOrder.getSize() * securityOrder.getPrice();
     if (account.getAmount() < price) {
@@ -116,9 +121,24 @@ public class OrderService {
    */
   private void handleSellMarketOrder(MarketOrderDto marketOrderDto, SecurityOrder securityOrder,
       Account account) {
-    Quote quote = quoteDao.findById(marketOrderDto.getTicker()).get();
+    Optional<Quote> quoteOptional = quoteDao.findById(marketOrderDto.getTicker());
+    Quote quote;
+    if (quoteOptional.isPresent()) {
+      quote = quoteOptional.get();
+    } else {
+      throw new IllegalArgumentException("Could not find ticker");
+    }
     securityOrder.setPrice(quote.getBidPrice());
-    Position position = positionDao.findById(account.getId(), marketOrderDto.getTicker()).get();
+
+    Optional<Position> positionOptional = positionDao.findTickerPositionById(account.getId(),
+        marketOrderDto.getTicker());
+    Position position;
+    if (positionOptional.isPresent()) {
+      position = positionOptional.get();
+    } else {
+      throw new IllegalArgumentException("Could not find position for given account");
+    }
+
     if (position.getPosition() - securityOrder.getSize() < 0) {
       securityOrder.setStatus("CANCELLED");
       securityOrder.setNotes("Insufficient position.");
@@ -130,3 +150,4 @@ public class OrderService {
     securityOrderDao.save(securityOrder);
   }
 }
+

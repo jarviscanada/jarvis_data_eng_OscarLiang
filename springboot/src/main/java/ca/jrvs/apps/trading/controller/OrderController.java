@@ -30,7 +30,7 @@ public class OrderController {
   }
 
   @ApiOperation(value = "Submit a market order",
-      notes = "Submit a merket order")
+      notes = "Submit a market order")
   @ApiResponses(value = {
       @ApiResponse(code = 404, message = "accountId or ticker is not found"),
       @ApiResponse(code = 400, message = "Unable to deposit due to user input")})

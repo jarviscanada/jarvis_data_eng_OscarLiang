@@ -120,8 +120,7 @@ public class TraderAccountService {
 
     if (fund <= 0) {
       throw new IllegalArgumentException("Cannot withdraw a fund of " + fund);
-    }
-    else if (account.getAmount() - fund < 0) {
+    } else if (account.getAmount() - fund < 0) {
       throw new IllegalArgumentException("Insufficient funds: tried to withdraw " + fund +
           " but only had " + account.getAmount());
     }
