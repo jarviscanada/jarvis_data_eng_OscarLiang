@@ -1,16 +1,18 @@
 package ca.jrvs.apps.trading.dao;
 
 import ca.jrvs.apps.trading.model.domain.SecurityOrder;
+import java.util.List;
 import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class SecurityOrderDao extends JdbcCrudDao<SecurityOrder>{
+public class SecurityOrderDao extends JdbcCrudDao<SecurityOrder> {
 
   private static final Logger logger = LoggerFactory.getLogger(TraderDao.class);
 
@@ -62,8 +64,8 @@ public class SecurityOrderDao extends JdbcCrudDao<SecurityOrder>{
   }
 
   private Object[] getUpdateValues(SecurityOrder entity) {
-    return new Object[] {entity.getAccountId(), entity.getStatus(), entity.getTicker(),
-      entity.getSize(), entity.getPrice(), entity.getNotes(), entity.getId()};
+    return new Object[]{entity.getAccountId(), entity.getStatus(), entity.getTicker(),
+        entity.getSize(), entity.getPrice(), entity.getNotes(), entity.getId()};
 
   }
 
@@ -81,5 +83,11 @@ public class SecurityOrderDao extends JdbcCrudDao<SecurityOrder>{
   @Override
   public void deleteAll(Iterable<? extends SecurityOrder> iterable) {
     throw new UnsupportedOperationException("Not implemented");
+  }
+
+  public List<SecurityOrder> findByAccountId(Integer accountId) {
+    String selectSql = "SELECT * FROM " + TABLE_NAME + " WHERE " + ACCOUNT_ID + "=?";
+    return getJdbcTemplate()
+        .query(selectSql, BeanPropertyRowMapper.newInstance(getEntityClass()), accountId);
   }
 }

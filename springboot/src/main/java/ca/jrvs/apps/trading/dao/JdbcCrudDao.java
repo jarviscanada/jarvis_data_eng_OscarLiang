@@ -31,6 +31,7 @@ public abstract class JdbcCrudDao<T extends Entity<Integer>> implements CrudRepo
 
   /**
    * Save an entity and update auto-generated integer ID
+   *
    * @param entity to be saved
    * @return save entity
    */
@@ -68,8 +69,8 @@ public abstract class JdbcCrudDao<T extends Entity<Integer>> implements CrudRepo
 
     try {
       entity = Optional.ofNullable(getJdbcTemplate()
-      .queryForObject(selectSql,
-          BeanPropertyRowMapper.newInstance(getEntityClass()), id));
+          .queryForObject(selectSql,
+              BeanPropertyRowMapper.newInstance(getEntityClass()), id));
     } catch (IncorrectResultSizeDataAccessException e) {
       logger.debug("Can't find trader id: " + id, e);
     }

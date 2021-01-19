@@ -1,6 +1,6 @@
 package ca.jrvs.apps.trading.dao;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import ca.jrvs.apps.trading.TestConfig;
 import ca.jrvs.apps.trading.model.domain.Account;
@@ -88,9 +88,9 @@ public class PositionDaoIntTest {
 
   @Test
   public void findById() {
-    Position position = positionDao
-        .findById(savedSecurityOrder.getAccountId(), savedSecurityOrder.getTicker()).get();
-    assertEquals(savedSecurityOrder.getSize(), position.getPosition());
+    List<Position> positions = positionDao.findById(savedSecurityOrder.getId());
+    assertEquals(1, positions.size());
+    assertEquals(savedSecurityOrder.getSize(), positions.get(0).getPosition());
   }
 
   @Test
