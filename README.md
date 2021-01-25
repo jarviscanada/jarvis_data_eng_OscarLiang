@@ -52,11 +52,11 @@ Project source code: [https://github.com/jarviscanada/jarvis_data_eng_OscarLiang
 ## Education
 **University of Toronto (2015-2020)**, Bachelor of Applied Science with Honours, Electrical and Computer Engineering
 - Dean's Honour List (2015, 2016, 2019, 2020): 5-time Recipient
-- GPA: 3.5/4.0
+- GPA: 3.49/4.0
 
 
 ## Miscellaneous
-- 3rd place - first-year, course-wide Reversi C programming competition
+- 4th place - first-year, course-wide Reversi C programming competition
 - Music - piano, electric bass, voice
 - Competitive gaming
 - Reading
