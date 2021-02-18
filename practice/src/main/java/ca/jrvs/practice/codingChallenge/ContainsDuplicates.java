@@ -9,8 +9,8 @@ import java.util.Set;
 public class ContainsDuplicates {
 
   /**
-   * Time complexity: O(n^2) - double for loop iterating through array in O(n^2) time.
-   * Space complexity: O(1) - constant sized variables
+   * Time complexity: O(n^2) - double for loop iterating through array in O(n^2) time. Space
+   * complexity: O(1) - constant sized variables
    */
   public boolean containsDuplicates(int[] nums) {
     for (int i = 0; i < nums.length; i++) {
@@ -25,8 +25,8 @@ public class ContainsDuplicates {
   }
 
   /**
-   * Time complexity: O(n) - iterate through array in linear time.
-   * Space complexity: O(n) - store single copy of values in hash table
+   * Time complexity: O(n) - iterate through array in linear time. Space complexity: O(n) - store
+   * single copy of values in hash table
    */
   public boolean containsDuplicatesSet(int[] nums) {
     Set<Integer> uniqueValues = new HashSet<>();

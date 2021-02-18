@@ -6,8 +6,8 @@ package ca.jrvs.practice.codingChallenge;
 public class PrintLetterAndNumber {
 
   /**
-   * Time complexity: O(n) - operate on each character of the string with constant time
-   * Space complexity: O(n) - create another string proportional to size of string
+   * Time complexity: O(n) - operate on each character of the string with constant time Space
+   * complexity: O(n) - create another string proportional to size of string
    */
   public String printLetterAndNumber(String s) {
     StringBuilder stringBuilder = new StringBuilder();

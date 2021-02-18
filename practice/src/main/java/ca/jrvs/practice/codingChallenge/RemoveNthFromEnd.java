@@ -8,8 +8,8 @@ import ca.jrvs.practice.codingChallenge.dataStructures.ListNode;
 public class RemoveNthFromEnd {
 
   /**
-   * Time complexity: O(n) - iterate through the entire linked list once.
-   * Space complexity: O(1) - two ListNode pointers
+   * Time complexity: O(n) - iterate through the entire linked list once. Space complexity: O(1) -
+   * two ListNode pointers
    */
   public ListNode removeNthFromEnd(ListNode head, int n) {
     ListNode end = head;
